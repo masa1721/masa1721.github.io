@@ -11,6 +11,7 @@
 
     <body style="margin: 0; overflow: hidden;">
         <a-scene
+            vr-mode-ui="enabled: false;"
             renderer="logarithmicDepthBuffer: true;"
             embedded
             loading-screen="enabled: false;"
@@ -22,7 +23,6 @@
                     src="assets02/asset.glb"
                 ></a-asset-item>
             </a-assets>
-
                 <a-entity
                     look-at="[gps-camera]"
                     animation-mixer="loop: repeat"

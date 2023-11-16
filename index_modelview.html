@@ -5,8 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+      #view_area {
+         width: 400px;
+         height: 400px;
+      }
+    </style>
     </head>
     <body>
+      <div id="view_area">
         <model-viewer
           ar
           ar-modes="scene-viewer webxr quick-look"
@@ -15,6 +22,7 @@
           auto-rotate
           camera-controls
         ></model-viewer>
-        <br>
+      </div>
+      <br>
     </body>
 </html>

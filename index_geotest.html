@@ -4,11 +4,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <script>
-function test() {
-    navigator.geolocation.getCurrentPosition(test2);
+function getPosition() {
+    navigator.geolocation.getCurrentPosition(getGeoReport);
 }
 
-function test2(position) {
+function getGeoReport(position) {
 
     var geo_text = "緯度:" + position.coords.latitude.toFixed(10) + "\n";
     geo_text += "経度:" + position.coords.longitude.toFixed(10) + "\n";
@@ -29,7 +29,8 @@ function test2(position) {
 </head>
 <body>
 <h1>2023年1月バージョン</h1>
-<h1><button onclick="test()">test</button></h1>
+<h1>GeoLocation API で緯度経度を測ります。</h1>
+<h1><button onclick="getPosition()">位置(緯度経度)を計測する</button></h1>
 
 
 </body>

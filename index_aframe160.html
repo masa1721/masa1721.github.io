@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- A-Frame 1.6.0: 最新バージョン 2024/11/09(土) -->
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-
-    <!-- AR.js: ロケーションベーストラッキング: GPSの緯度経度情報使用 -->
-    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js'></script>
-
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
 </head>
 <body>
     <a-scene>
@@ -19,7 +15,6 @@
         <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
         <a-sky color="#ECECEC"></a-sky>
-        <a-entity camera></a-entity>
       </a-scene>
 
       <!-- このシーンにAR.jsでWebカメラを定義してAR化する。 -->

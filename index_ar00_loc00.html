@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Base: A-FrameとAR.jsでWebARを実装するよ。</title>
+    <!-- A-Frameを読み込む: A-Frameバージョンの違いが表示を左右する場合があるので注意すること。 -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!--
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+     --> 
+
+    <!-- AR.jsを読み込む[A-Frame用バージョン(three.jsバージョンもある。)]: イメージ追跡、マーカー追跡、位置追跡 どれにする??? -->
+    <!-- AR.js: ロケーションベーストラッキング: GPSの緯度経度情報使用 -->
+    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js'></script>
+    <!-- AR.jsとA-Frameのバージョン適合に注意。[AR.js 3.4.5 と A-Frame1.3.0] [AR.js 3.4.4以下 と A-Frame1.0.4] -->
+</head>
+<body>
+    <!-- A-FrameタグとAR.jsを組み合わせてARシーンを構築する。 -->
+    <!-- a-scene にいくつかのオプションを設定する。 -->
+    <a-scene vr-mode-ui="enabled: false"
+        arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false"
+        renderer="antialias: true; alpha: true">
+        <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+        <!-- entityをgeometryとmaterial, primitive オブジェクトで配置。 -->
+        <!-- 402準備室 緯度経度 Google Mapより: 37.95611635690242, 139.3376316174045 -->
+        <a-entity material='color: red' geometry='primitive: box'
+            gps-new-entity-place="latitude: 37.95611635690242; longitude: 139.3376316174045"
+            scale="10 10 10">
+        </a-entity>
+        <!-- entityをglbオブジェクトで配置。 -->
+        <a-entity 
+            gps-new-entity-place="latitude: 37.95611635690242; longitude: 139.3376316174045"
+            gltf-model="url(./glb/shibata_logo.glb)"
+            scale="2 2 2"
+            position="0 0 -1">
+        </a-entity>
+    </a-scene>
+</body>
+</html>

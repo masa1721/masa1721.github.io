@@ -8,6 +8,7 @@
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
 </head>
 <body>
+    <h1>純粋なA-Frameの実行: WebVR構築ツールとしてのA-Frameの利用。</h1>
     <a-scene>
         <!-- A-Frameシーンにプリミティブ図形を並べた。 -->
         <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
@@ -15,6 +16,12 @@
         <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
         <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
         <a-sky color="#ECECEC"></a-sky>
+
+        <a-entity 
+            gltf-model="./gltf_models/shibata_logo.glb"
+            scale="2 2 2"
+            position="0 0 1"></a-entity>
+
       </a-scene>
 
       <!-- このシーンにAR.jsでWebカメラを定義してAR化する。 -->

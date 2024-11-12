@@ -15,6 +15,7 @@
     <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/3.4.5/three.js/build/ar-threex-location-only.js'></script>
     <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js'></script>
     <!-- AR.jsとA-Frameのバージョン適合に注意。[AR.js 3.4.5 と A-Frame1.3.0] [AR.js 3.4.4以下 と A-Frame1.0.4] -->
+    <!-- animation-mixer を利用するときに必要な extraライブラリ -->
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
 </head>
 <body>
@@ -32,7 +33,7 @@
         <!-- entityをglbオブジェクトで配置。  animation-mixer -->
         <a-entity 
             gps-new-entity-place="latitude: 37.95607881788482; longitude: 139.33762290036003"
-            gltf-model="url(./glb/poppo.glb)"
+            gltf-model="url(./glb/model.glb)"
             scale="1 1 1"
             position="9 3 -6" rotation="0 0 0" animation-mixer>
         </a-entity>

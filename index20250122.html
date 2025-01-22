@@ -18,7 +18,7 @@
     <!-- AR.jsとA-Frameのバージョン適合に注意。[AR.js 3.4.5 と A-Frame1.3.0] [AR.js 3.4.4以下 と A-Frame1.0.4] -->
     <!-- A-Frameのライブラリ: バージョン 1.4.0 と 1.3.0 がある。 2025/01/22 現在 -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <!-- <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script> -->
+    <!-- <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script> -->
 
     <!-- AR.jsのライブラリ -->
     <!-- カメラの正面に3Dオブジェクトを配置するライブラリとかがある。 -->
@@ -28,7 +28,7 @@
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
     <!-- glbのアニメーションを有効(animation-mixerを利用)にするextraライブラリ -->
-    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
+    <script type='text/javascript' src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
 <!--
     <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js'></script>
 -->
@@ -69,7 +69,7 @@
 <body style="margin: 0; overflow: hidden;">
     <a-scene 
       antialias="true" 
-      renderer="logarithmicDepthBuffer: true; alpha: true; precision: highp;" 
+      renderer="logarithmicDepthBuffer: true; alpha: true; precision: high;" 
       vr-mode-ui="enabled: false" 
       embedded 
       arjs="sourceType: webcam; debugUIEnabled: false;">

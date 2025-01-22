@@ -1,0 +1,175 @@
+<!DOCTYPE html> <!-- 煉瓦屋 コーヒー 細川君のキャラボブ ポニテ -->
+<!-- 
+こったまーや:https://raw.githubusercontent.com/ei-pc10/show_models/main/kottamaya.glb 37.9584489943575, 139.34264597477087
+煉瓦屋:https://raw.githubusercontent.com/ei-pc10/show_models/main/renga.glb 37.94892959990337, 139.32432669317228
+新発田市章:https://raw.githubusercontent.com/ei-pc10/show_models/main/shibata_logo.glb 37.94822800327645, 139.327420987668
+新発田城:https://raw.githubusercontent.com/ei-pc10/show_models/main/shibatajyo.glb 37.95474094660365, 139.32598240586483
+諏訪ノ森時計:https://raw.githubusercontent.com/ei-pc10/show_models/main/suwanomori_clock.glb 37.944355706564394, 139.33082423638757
+新発田市役所:https://raw.githubusercontent.com/ei-pc10/show_models/main/siyakusyo1.glb 37.94822800327645, 139.327420987668
+細川君のモデル:https://raw.githubusercontent.com/ei-pc10/show_models/main/hosokawa_bob.glb 37.95586802839388, 139.33838324548068
+
+-->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>AR.js Location-Based 3D Models</title>
+
+    <!-- AR.jsとA-Frameのバージョン適合に注意。[AR.js 3.4.5 と A-Frame1.3.0] [AR.js 3.4.4以下 と A-Frame1.0.4] -->
+    <!-- A-Frameのライブラリ: バージョン 1.4.0 と 1.3.0 がある。 2025/01/22 現在 -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <!-- <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script> -->
+
+    <!-- AR.jsのライブラリ -->
+    <!-- カメラの正面に3Dオブジェクトを配置するライブラリとかがある。 -->
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    
+    <!-- AR.js: イメージトラッキング: Natural Feature Tracking (NFT) 自然特徴点の認識技術 -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+    <!-- glbのアニメーションを有効にするextraライブラリ -->
+    <script                        src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
+<!--
+    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js'></script>
+-->
+    <!-- AR.js: ロケーションベーストラッキング: GPSの緯度経度情報使用  AR.jsバージョン3.x.x 明記のライブラリ AR.jsドキュメントで使用 -->
+    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/3.4.5/aframe/build/aframe-ar.js'></script>
+    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/3.4.5/three.js/build/ar-threex-location-only.js'></script>
+
+    <!-- これ以外にも、アニメーションを有効にするためのextraライブラリとか もある。-->
+
+    <script>
+      // rotation-sync コンポーネントを定義（モデルの回転を変更しない）
+      AFRAME.registerComponent('rotation-sync', {
+        tick: function () {
+          // ここではカメラの回転情報を取得しますが、モデルには影響を与えません。
+          const cameraRotation = this.el.sceneEl.camera.el.getAttribute('rotation');
+        }
+      });
+
+      // ポリゴンオフセット用コンポーネントを定義
+      AFRAME.registerComponent('polygon-offset', {
+        schema: {
+          factor: { type: 'number', default: 1 }, // オフセット係数
+          units: { type: 'number', default: 1 },  // オフセット単位
+        },
+        init: function () {
+          const mesh = this.el.getObject3D('mesh');
+          if (mesh) {
+            mesh.traverse(node => {
+              if (node.isMesh) {
+                node.material.polygonOffset = true;
+                node.material.polygonOffsetFactor = this.data.factor;
+                node.material.polygonOffsetUnits = this.data.units;
+              }
+            });
+          }
+        }
+      });
+    </script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene 
+      antialias="true" 
+      renderer="logarithmicDepthBuffer: true; alpha: true; precision: highp;" 
+      vr-mode-ui="enabled: false" 
+      embedded 
+      arjs="sourceType: webcam; debugUIEnabled: false;">
+      
+      <!-- カメラの設定 -->
+      <!--
+      <a-camera gps-camera rotation-sync></a-camera>
+      <a-camera gps-camera="minDistance:5; maxDistance:500"></a-camera>
+      -->
+      <!-- 上は2023富樫君 -->
+
+      <a-camera gps-new-camera="minDistance:5; maxDistance:5000"></a-camera>  <!-- AR.jsドキュメントお薦め -->
+
+      <!-- 環境光 -->
+      <a-light type="ambient" color="#ffffff" intensity="0.5"></a-light>
+
+      <!-- ディレクショナルライト -->
+      <a-light 
+        type="directional" 
+        position="1 2 0.5" 
+        intensity="0.8" 
+        target="#model" 
+        castShadow="true"></a-light>
+
+      <!-- 3Dモデルにポリゴンオフセットを適用 -->
+      <!-- 細川君のちびキャラ -->
+      <a-entity 
+        id="hosokawa_bob"
+        gps-entity-place="latitude: 37.95623964531757; longitude: 139.3371717973987"
+        gps-new-entity-place="latitude: 37.95623964531757; longitude: 139.3371717973987"  <!-- 新しい記述 -->
+        gltf-model="url(./glb/renga.glb)" 
+        scale="8 8 8" 
+        look-at="[camera]"
+        polygon-offset="factor: 1; units: 1">
+      </a-entity>
+        
+      <!-- こったまーや -->
+      <a-entity 
+        id="kottama-ya"
+        gps-new-entity-place="latitude: 37.9584489943575; longitude: 139.34264597477087" 
+        gltf-model="url(./glb/renga.glb)"
+        scale="8 8 8"
+        look-at="[camera]"
+        polygon-offset="factor: 1; units: 1">
+      </a-entity>
+
+      <!-- 新発田城 -->
+      <a-entity 
+        id="shibatajyo"
+        gps-new-entity-place="latitude: 37.95474094660365; longitude: 139.32598240586483" 
+        gltf-model="url(./glb/renga.glb)" 
+        scale="10 10 10"
+        look-at="[camera]"
+        polygon-offset="factor: 1; units: 1">
+      </a-entity>
+
+     <!-- 煉瓦屋 -->
+      <a-entity 
+        id="renga"
+        gps-new-entity-place="latitude: 37.94892959990337; longitude: 139.32432669317228" 
+        gltf-model="url(./glb/renga.glb)" 
+        scale="8 8 8" 
+        look-at="[camera]"
+        polygon-offset="factor: 1; units: 1">
+      </a-entity>
+
+      <!-- 新発田市章 -->
+      <a-entity 
+        id="shibata_logo"
+        gps-new-entity-place="latitude: 37.94822800327645; longitude: 139.327420987668" 
+        gltf-model="url(./glb/renga.glb)" 
+        scale="5 5 5" 
+        position="0 50 0"
+        look-at="[camera]"
+        polygon-offset="factor: 1; units: 1">
+      </a-entity>
+
+     <!-- 諏訪ノ森時計 -->
+      <a-entity 
+        id="suwanomori_clock"
+        gps-new-entity-place="latitude: 37.944355706564394; longitude: 139.33082423638757" 
+        gltf-model="url(./glb/renga.glb)" 
+        scale="10 10 10" 
+        look-at="[camera]"
+        polygon-offset="factor: 1; units: 1">
+      </a-entity>
+
+
+      <!-- 新発田市役所 -->
+      <a-entity 
+        id="shibata_siyakusyo"
+        gps-new-entity-place="latitude: 37.94822800327645; longitude: 139.327420987668" 
+        gltf-model="url(./glb/renga.glb)" 
+        scale="5 5 5" 
+        look-at="[camera]"
+        polygon-offset="factor: 1; units: 1">
+      </a-entity>
+        
+    </a-scene>
+</body>
+</html>

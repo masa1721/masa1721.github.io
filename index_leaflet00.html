@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Leaflet + OpenStreetMap サンプル</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- <link rel="stylesheet" href="../css/leaflet.css"> -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <h1>Leaflet + OpenStreetMap 地図アプリ</h1>
+    <div id="map"></div>
+
+    <script>
+        // 地図を表示するためのdiv要素を取得
+        const mapDiv = document.getElementById('map');
+
+        // Leafletで地図を初期化
+        const map = L.map(mapDiv).setView([35.681236, 139.767125], 13); // 東京駅の緯度経度とズームレベル
+
+        // OpenStreetMapのタイルレイヤーを追加
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    </script>
+</body>
+</html>
+

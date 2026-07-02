@@ -23,16 +23,16 @@
     <!-- カメラ（位置情報を取得） -->
       <a-camera gps-new-camera='gpsMinDistance: 10' rotation-reader></a-camera>
 
-      <!-- 日本語テキストを現在地に配置: 準備室(37.956062, 139.337645) -->
+      <!-- 日本語テキストを新発田市役所に配置: 新発田市役所(37.9479537, 139.3269729) -->
 
       <a-entity
-        gps-new-entity-place="latitude: 37.956062; longitude: 139.337645"
+        gps-new-entity-place="latitude: 37.9479537; longitude: 139.3269729"
         text="value: ここは新発田市です！; color: red; align: center;"
         scale="10 10 10">
       </a-entity>
       
       <a-entity material='color: red' geometry='primitive: box'
-        gps-new-entity-place="latitude: 37.956062; longitude: 139.337645"
+        gps-new-entity-place="latitude: 37.9479537; longitude: 139.3269729"
         scale="10 10 10">
       </a-entity>
       
@@ -49,35 +49,7 @@
         console.log('Geolocationはサポートされていません。');
       }
 
-      // 現在地の緯度経度を取得して、テキストの位置を更新する
-      function updateTextPosition() {
-        if ('geolocation' in navigator) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-
-            // テキストの位置を更新する
-            var textEntity = document.querySelector('a-entity[text]');
-            textEntity.setAttribute('gps-new-entity-place', 'latitude: ' + latitude + '; longitude: ' + longitude);
-          });
-        }
-      }
-
-      // boxの位置も更新する
-      function updateBoxPosition() {
-        if ('geolocation' in navigator) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-
-            // boxの位置を更新する
-            var boxEntity = document.querySelector('a-entity[geometry]');
-            boxEntity.setAttribute('gps-new-entity-place', 'latitude: ' + latitude + '; longitude: ' + longitude);
-          });
-        }
-      }
-
-      // 5秒ごとにテキストとボックスの位置を更新する
+      // 5秒ごとにユーザーの現在位置を更新する
       setInterval(updateTextPosition, 5000);
       setInterval(updateBoxPosition, 5000);
 

@@ -21,12 +21,12 @@
       renderer='antialias: true; alpha: true'>
 
     <!-- カメラ（位置情報を取得） -->
-      <a-camera gps-camera='gpsMinDistance: 10' rotation-reader></a-camera>
+      <a-camera gps-new-camera='gpsMinDistance: 10' rotation-reader></a-camera>
 
       <!-- 日本語テキストを新発田市役所に配置: 新発田市役所(37.9479537, 139.3269729) -->
 
       <a-entity
-        gps-new-entity-place="latitude: 37.9479537; longitude: 139.3269729"
+        gps-entity-place="latitude: 37.9479537; longitude: 139.3269729"
         text="value: ここは新発田市です！; color: red; align: center;"
         scale="100 100 100">
       </a-entity>

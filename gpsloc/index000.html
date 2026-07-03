@@ -7,16 +7,29 @@
 <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/3.4.7/aframe/build/aframe-ar.js'></script>
 </head>
 <body>
-<a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
+<a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false'
+   renderer='antialias: true; alpha: true'>
     <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
     <!--
     <a-entity material='color: red' geometry='primitive: box'
-        gps-new-entity-place="latitude: 37.9479537; longitude: 139.3269729" scale="100 100 100">
+        gps-new-entity-place="latitude: 37.9479537; longitude: 139.3269729" scale="10 10 10">
     </a-entity>
     -->
-    
-    <a-box material="color: green" gps-new-entity-place="latitude: 37.9479537; longitude: 139.3269729" scale="50 50 50"></a-box>
-    
+    <!-- 新発田市役所 -->
+    <a-box material="color: yellow" gps-new-entity-place="latitude: 37.9479537; longitude: 139.3269729" scale="50 50 50">
+    </a-box>
+    <a-text value="Shibata Office" look-at="[gps-camera]" scale="50 50 50"
+        gps-entity-place="latitude: 37.9479537; longitude: 139.3269729;">
+    </a-text>
+
+    <!-- JR新発田駅 -->
+    <a-box material="color: green" gps-new-entity-place="latitude: 37.944171; longitude: 139.334887" scale="50 50 50">
+    </a-box>
+
+    <!-- 新発田城 -->
+    <a-box material="color: red" gps-new-entity-place="latitude: 37.9547987; longitude: 139.3259709" scale="50 50 50"/>
+
+
 </a-scene>
 </body>
 </html>

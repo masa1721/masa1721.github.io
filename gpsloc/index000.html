@@ -21,7 +21,7 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%); /* 画面中央揃え */
-      background: rgba(0, 0, 0, 0.6); /* 半透明の黒背景 */
+      background: rgba(0, 0.9, 0.5, 0.6); /* 半透明の黒背景 */
       color: #ffffff;
       padding: 10px 20px;
       border-radius: 8px;
@@ -34,7 +34,7 @@
 <body>
 <!-- HTML/CSSによる画面固定のUI要素 -->
   <div class="ar-ui-container">
-    <div class="fixed-text">画面固定：HTML/CSSの文字列</div>
+    <div class="fixed-text">[位置情報] 緯度:36.1234  経度:139.3456  高度: 8.5m</div>
   </div>   
 <a-scene xr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false'
    renderer='antialias: true; alpha: true'>

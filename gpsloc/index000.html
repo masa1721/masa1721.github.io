@@ -16,7 +16,7 @@
       pointer-events: none; /* UIの透明な部分がARのクリック操作を邪魔しないようにする */
       font-family: sans-serif;
     }
-   .fixed-text {
+    #loc-info {
       position: absolute;
       top: 10px;
       left: 10px;
@@ -35,7 +35,7 @@
 <!-- HTML/CSSによる画面固定のUI要素 -->
   <div class="ar-ui-container">
    <!-- Geolocatioの緯度経度情報をここに動的に埋め込む。 -->
-    <div class="fixed-text">[位置情報] 緯度:36.1234  経度:139.3456  高度: 8.5m</div>
+    <div id="loc-info">[位置情報] 緯度:36.1234  経度:139.3456  高度: 8.5m</div>
   </div>   
 <a-scene xr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false'
    renderer='antialias: true; alpha: true'>

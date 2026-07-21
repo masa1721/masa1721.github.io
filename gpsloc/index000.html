@@ -34,6 +34,7 @@
 <body>
 <!-- HTML/CSSによる画面固定のUI要素 -->
   <div class="ar-ui-container">
+   <!-- Geolocatioの緯度経度情報をここに動的に埋め込む。 -->
     <div class="fixed-text">[位置情報] 緯度:36.1234  経度:139.3456  高度: 8.5m</div>
   </div>   
 <a-scene xr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false'
@@ -75,5 +76,10 @@
     </a-box>
     
 </a-scene>
+<script>
+  'use strict';
+  let latlon = "動的なGPS情報";
+   
+</script>
 </body>
 </html>

@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スマートフォンの回転角</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f5fa;
+        }
+        h1 {
+            font-size: 1.5em;
+        }
+        #angle {
+            font-size: 3em;
+            font-weight: bold;
+            color: #0066cc;
+            margin: 30px 0;
+        }
+        button {
+            font-size: 1.1em;
+            padding: 12px 24px;
+            margin: 5px;
+        }
+        #status {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Z軸周りの回転角</h1>
+    <p>スマートフォンの向きを変えてください。</p>
+    <div id="angle">--- °</div>
+    <button id="startButton">計測開始</button>
+    <button id="stopButton">計測停止</button>
+    <p id="status">計測開始ボタンを押してください。</p>
+    <script>
+        const angleElement = document.getElementById("angle");
+        const statusElement = document.getElementById("status");
 
+        let measuring = false;
+
+        // 端末の向きが変化したときに呼び出される
+        function handleOrientation(event) {
+            const alpha = event.alpha;
+
+            if (alpha === null || !Number.isFinite(alpha)) {
+                statusElement.textContent =
+                    "回転角を取得できません。";
+                return;
+            }
+
+            // Z軸周りの回転角を表示
+            angleElement.textContent =
+                alpha.toFixed(1) + " °";
+
+            statusElement.textContent =
+                "計測中";
+        }
+
+        // 計測開始
+        async function startMeasurement() {
+            if (measuring) return;
+
+            // iOSなど、明示的な許可が必要な場合に対応
+            if (
+                typeof DeviceOrientationEvent !== "undefined" &&
+                typeof DeviceOrientationEvent.requestPermission
+                    === "function"
+            ) {
+                try {
+                    const permission =
+                        await DeviceOrientationEvent.requestPermission();
+
+                    if (permission !== "granted") {
+                        statusElement.textContent =
+                            "センサーの利用が許可されませんでした。";
+                        return;
+                    }
+                } catch (error) {
+                    statusElement.textContent =
+                        "許可の取得に失敗しました。";
+                    return;
+                }
+            }
+
+            if (typeof DeviceOrientationEvent === "undefined") {
+                statusElement.textContent =
+                    "このブラウザはDeviceOrientationEventに対応していません。";
+                return;
+            }
+
+            window.addEventListener(
+                "deviceorientation",
+                handleOrientation
+            );
+
+            measuring = true;
+
+            statusElement.textContent =
+                "センサーのデータを待っています。";
+        }
+
+        // 計測停止
+        function stopMeasurement() {
+            window.removeEventListener(
+                "deviceorientation",
+                handleOrientation
+            );
+
+            measuring = false;
+
+            statusElement.textContent =
+                "計測を停止しました。";
+        }
+
+        document.getElementById("startButton")
+            .addEventListener("click", startMeasurement);
+
+        document.getElementById("stopButton")
+            .addEventListener("click", stopMeasurement);
+    </script>
+</body>
+</html>
+```

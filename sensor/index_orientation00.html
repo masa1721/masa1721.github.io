@@ -69,9 +69,9 @@
 
         // 端末の向きが変化したときに実行
         function handleOrientation(event) {
-            const alpha = event.alpha;
-            const beta = event.beta;
-            const gamma = event.gamma;
+            const alpha = event.alpha;  // z軸回り
+            const beta = event.beta;  // x軸回り
+            const gamma = event.gamma;  // y軸回り
 
             // センサー値の取得状況を確認
             if (

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スマートフォンの回転角</title>
+    <title>スマートフォンの3軸回転角</title>
     <style>
         body {
             font-family: sans-serif;
@@ -11,61 +11,97 @@
             padding: 20px;
             background-color: #f0f5fa;
         }
+
         h1 {
             font-size: 1.5em;
         }
-        #angle {
-            font-size: 3em;
+
+        .angle {
+            font-size: 1.4em;
+            margin: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .value {
+            font-size: 1.6em;
             font-weight: bold;
             color: #0066cc;
-            margin: 30px 0;
         }
+
         button {
             font-size: 1.1em;
             padding: 12px 24px;
             margin: 5px;
         }
+
         #status {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Z軸周りの回転角</h1>
+    <h1>スマートフォンの3軸回転角</h1>
     <p>スマートフォンの向きを変えてください。</p>
-    <div id="angle">--- °</div>
+    <div class="angle">
+        Z軸周り（α）
+        <div id="alpha" class="value">--- °</div>
+    </div>
+    <div class="angle">
+        X軸周り（β）
+        <div id="beta" class="value">--- °</div>
+    </div>
+    <div class="angle">
+        Y軸周り（γ）
+        <div id="gamma" class="value">--- °</div>
+    </div>
     <button id="startButton">計測開始</button>
     <button id="stopButton">計測停止</button>
     <p id="status">計測開始ボタンを押してください。</p>
     <script>
-        const angleElement = document.getElementById("angle");
+        const alphaElement = document.getElementById("alpha");
+        const betaElement = document.getElementById("beta");
+        const gammaElement = document.getElementById("gamma");
         const statusElement = document.getElementById("status");
 
         let measuring = false;
 
-        // 端末の向きが変化したときに呼び出される
+        // 端末の向きが変化したときに実行
         function handleOrientation(event) {
             const alpha = event.alpha;
+            const beta = event.beta;
+            const gamma = event.gamma;
 
-            if (alpha === null || !Number.isFinite(alpha)) {
+            // センサー値の取得状況を確認
+            if (
+                alpha === null ||
+                beta === null ||
+                gamma === null
+            ) {
                 statusElement.textContent =
                     "回転角を取得できません。";
                 return;
             }
 
-            // Z軸周りの回転角を表示
-            angleElement.textContent =
+            // 3軸の回転角を画面に表示
+            alphaElement.textContent =
                 alpha.toFixed(1) + " °";
 
-            statusElement.textContent =
-                "計測中";
+            betaElement.textContent =
+                beta.toFixed(1) + " °";
+
+            gammaElement.textContent =
+                gamma.toFixed(1) + " °";
+
+            statusElement.textContent = "計測中";
         }
 
         // 計測開始
         async function startMeasurement() {
             if (measuring) return;
 
-            // iOSなど、明示的な許可が必要な場合に対応
+            // iOSなどのセンサー利用許可に対応
             if (
                 typeof DeviceOrientationEvent !== "undefined" &&
                 typeof DeviceOrientationEvent.requestPermission
@@ -87,9 +123,10 @@
                 }
             }
 
+            // APIの対応状況を確認
             if (typeof DeviceOrientationEvent === "undefined") {
                 statusElement.textContent =
-                    "このブラウザはDeviceOrientationEventに対応していません。";
+                    "このブラウザはセンサーに対応していません。";
                 return;
             }
 
@@ -113,8 +150,7 @@
 
             measuring = false;
 
-            statusElement.textContent =
-                "計測を停止しました。";
+            statusElement.textContent = "計測を停止しました。";
         }
 
         document.getElementById("startButton")
